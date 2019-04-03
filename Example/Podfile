@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'PTTextField_Example' do
+  pod 'PTTextField', :path => '../'
+
+  target 'PTTextField_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
