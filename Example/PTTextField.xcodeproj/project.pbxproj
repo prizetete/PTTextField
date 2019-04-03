@@ -28,7 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0584282EC4DB145E8352BA31 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		0584282EC4DB145E8352BA31 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		0B127495275AE0F402905C2E /* Pods_PTTextField_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PTTextField_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* PTTextField_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PTTextField_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -43,10 +43,10 @@
 		650FEA2B72FC5FF184F34C24 /* Pods-PTTextField_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PTTextField_Example.release.xcconfig"; path = "Target Support Files/Pods-PTTextField_Example/Pods-PTTextField_Example.release.xcconfig"; sourceTree = "<group>"; };
 		7C8E4CB31CE06DD4447D4309 /* Pods_PTTextField_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PTTextField_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89E747F239AED462E1CA9CFA /* Pods-PTTextField_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PTTextField_Example.debug.xcconfig"; path = "Target Support Files/Pods-PTTextField_Example/Pods-PTTextField_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		8CAE19228F72C0D5098EB9C4 /* PTTextField.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = PTTextField.podspec; path = ../PTTextField.podspec; sourceTree = "<group>"; };
+		8CAE19228F72C0D5098EB9C4 /* PTTextField.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PTTextField.podspec; path = ../PTTextField.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B7374108BB2A57D612A12DCF /* Pods-PTTextField_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PTTextField_Tests.debug.xcconfig"; path = "Target Support Files/Pods-PTTextField_Tests/Pods-PTTextField_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		E7D957934EA3D7AC38C4E34A /* Pods-PTTextField_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PTTextField_Tests.release.xcconfig"; path = "Target Support Files/Pods-PTTextField_Tests/Pods-PTTextField_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		F9EFDC32797AC28A3772FF84 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		F9EFDC32797AC28A3772FF84 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +147,6 @@
 				B7374108BB2A57D612A12DCF /* Pods-PTTextField_Tests.debug.xcconfig */,
 				E7D957934EA3D7AC38C4E34A /* Pods-PTTextField_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -227,6 +226,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);

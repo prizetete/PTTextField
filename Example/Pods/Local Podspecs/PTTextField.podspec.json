@@ -1,0 +1,22 @@
+{
+  "name": "PTTextField",
+  "version": "0.1.0",
+  "summary": "A short description of PTTextField.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/prizetete/PTTextField",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "prizetete": "prizetete1212@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/prizetete/PTTextField.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "PTTextField/Classes/**/*"
+}

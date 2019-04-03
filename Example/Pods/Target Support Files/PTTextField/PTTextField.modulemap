@@ -1,0 +1,6 @@
+framework module PTTextField {
+  umbrella header "PTTextField-umbrella.h"
+
+  export *
+  module * { export * }
+}
