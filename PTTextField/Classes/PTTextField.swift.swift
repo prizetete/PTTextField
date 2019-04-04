@@ -1,34 +1,35 @@
 //
 //  PTTextField.swift
-//  IntroducePaiApp
+//  Pantip
 //
-//  Created by Komkrit Siratitanan on 2/4/2562 BE.
-//  Copyright © 2562 Komkrit Siratitanan. All rights reserved.
+//  Created by Komkrit Siratitanan on 4/4/2562 BE.
+//  Copyright © 2562 InternetMarketing. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-public class PTTextField: UITextField {
-    public var mView: UIView!
-    public var mLabel: UILabel!
+open class PTTextField: UITextField {
+    var mView: UIView!
+    var mLabel: UILabel!
     
-    public var sRegEX: String!
-    public var sTextShow: String! = ""
+    var sRegEX: String!
+    var sTextShow: String! = ""
     
-    public var oBorderColor: UIColor!
-    public var oCorrectColor: UIColor!
-    public var oWrongColor: UIColor!
-    public var oBGColor: UIColor!
-    public var oFontColor: UIColor!
-    public var oPlaceHolderColor: UIColor!
+    var oBorderColor: UIColor!
+    var oCorrectColor: UIColor!
+    var oWrongColor: UIColor!
+    var oBGColor: UIColor!
+    var oFontColor: UIColor!
+    var oPlaceHolderColor: UIColor!
     
-    public var bVerify: Bool!
-    public var bIsShowing: Bool!
+    var bVerify: Bool!
+    var bIsShowing: Bool!
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.delegate = self
+    private let padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         self.bVerify = false
         self.bIsShowing = false
         self.sRegEX = ""
@@ -36,7 +37,10 @@ public class PTTextField: UITextField {
         self.mLabel = UILabel()
     }
     
-    public func setupPTTextField(sTextShow: String, oBGColor: UIColor = .white, oPlaceHolderColor: UIColor = .gray, oFontColor: UIColor = .gray, sRegEX: String = "", oCorrectColor: UIColor = .green, oWrongColor: UIColor = .red, cornerRadius: CGFloat = 10.0, borderColor: UIColor = .gray, borderWidth: CGFloat = 1.0) {
+    
+    public func setupPTTextField(target: AnyObject, sTextShow: String, oBGColor: UIColor = .white, oPlaceHolderColor: UIColor = .gray, oFontColor: UIColor = .gray, sRegEX: String = "", oCorrectColor: UIColor = .green, oWrongColor: UIColor = .red, cornerRadius: CGFloat = 10.0, borderColor: UIColor = .gray, borderWidth: CGFloat = 1.0, bHaveClearBtn: Bool = true) {
+        self.delegate = self
+        self.clearButtonMode = .whileEditing;
         self.sTextShow = sTextShow
         self.oBorderColor = borderColor
         self.oFontColor = oFontColor
@@ -45,13 +49,15 @@ public class PTTextField: UITextField {
         self.oWrongColor = oWrongColor
         self.oCorrectColor = oCorrectColor
         self.sRegEX = sRegEX
+        
         self.layer.cornerRadius = cornerRadius
         self.layer.borderColor = borderColor.cgColor
         self.layer.borderWidth = borderWidth
+        self.backgroundColor = oBGColor
         self.attributedPlaceholder = NSAttributedString(
             string: self.sTextShow,
             attributes: [
-                NSAttributedString.Key.foregroundColor: self.oPlaceHolderColor,
+                NSAttributedString.Key.foregroundColor: self.oPlaceHolderColor!,
                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16.0)
             ]
         )
@@ -69,22 +75,18 @@ public class PTTextField: UITextField {
         return bounds.insetBy(dx: 10.0, dy: 10.0)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func getWidthSize(fSize: CGFloat) -> CGFloat {
+    private func getWidthSize(fSize: CGFloat) -> CGFloat {
         let fontAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fSize)]
         let size = self.sTextShow.size(withAttributes: fontAttributes)
         return size.width
     }
     
-    func setPTTextFieldColor(oFontColor: UIColor = .gray, oBorderColor: UIColor = .gray) {
+    public func setPTTextFieldColor(oFontColor: UIColor = .gray, oBorderColor: UIColor = .gray) {
         self.layer.borderColor = oBorderColor.cgColor
         self.mLabel.textColor = oFontColor
     }
     
-    func VerifyText(oCorrectColor: UIColor, oWrongColor: UIColor, sTextCheck: String , sRegex: String) {
+    private func VerifyText(oCorrectColor: UIColor, oWrongColor: UIColor, sTextCheck: String , sRegex: String) {
         if let _ = sTextCheck.range(of:sRegex, options: .regularExpression) {
             self.layer.borderColor = oCorrectColor.cgColor
         } else {
@@ -93,9 +95,8 @@ public class PTTextField: UITextField {
     }
 }
 
-@available(iOS 9.0, *)
 extension PTTextField: UITextFieldDelegate {
-    private func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let sTxt: String = "\(String(textField.text!))\(string)"
         if !self.sRegEX.isEmpty {
             self.VerifyText(oCorrectColor: self.oCorrectColor, oWrongColor: self.oWrongColor, sTextCheck: sTxt, sRegex: self.sRegEX)
@@ -103,20 +104,19 @@ extension PTTextField: UITextFieldDelegate {
         return true
     }
     
-    private func textFieldDidBeginEditing(_ textField: UITextField) {
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
         self.placeholder = ""
         self.superview?.addSubview(self.mView)
         self.mView.addSubview(self.mLabel)
         
         self.mView.backgroundColor = self.oBGColor
         if self.text!.isEmpty {
-            self.mLabel.textColor = self.oPlaceHolderColor
             self.mView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            self.mView.frame = CGRect(x: textField.frame.origin.x + 10.0, y: textField.frame.origin.y + (self.frame.size.height / 4), width: self.getWidthSize(fSize: 16.0) + 8, height: (self.frame.size.height / 2))
+            self.mView.frame = CGRect(x: textField.frame.origin.x + 10.0, y: textField.frame.origin.y + (self.frame.size.height / 4), width: self.getWidthSize(fSize: 16.0) + 16.0, height: (self.frame.size.height / 2))
         } else {
-            self.mLabel.textColor = self.oFontColor
+            //            self.mLabel.textColor = self.oFontColor
             self.mView.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
-            self.mView.frame = CGRect(x: textField.frame.origin.x + 10.0, y: textField.frame.origin.y - (self.frame.size.height / 4), width: self.getWidthSize(fSize: 12.0), height: (self.frame.size.height / 2))
+            self.mView.frame = CGRect(x: textField.frame.origin.x + 10.0, y: textField.frame.origin.y - (self.frame.size.height / 4), width: self.getWidthSize(fSize: 12.0) + 8.0, height: (self.frame.size.height / 2))
         }
         
         self.mLabel.text = self.sTextShow
@@ -132,7 +132,7 @@ extension PTTextField: UITextFieldDelegate {
             UIView.animate(withDuration: 0.25, animations: {
                 self.bIsShowing = true
                 self.mView.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
-                self.mView.frame = CGRect(x: textField.frame.origin.x + 10.0, y: textField.frame.origin.y - (self.frame.size.height / 4), width: self.getWidthSize(fSize: 12.0), height: (self.frame.size.height / 2))
+                self.mView.frame = CGRect(x: textField.frame.origin.x + 10.0, y: textField.frame.origin.y - (self.frame.size.height / 4), width: self.getWidthSize(fSize: 12.0) + 8.0, height: (self.frame.size.height / 2))
                 UIView.transition(with: self.mLabel, duration: 0.25, options: .transitionCrossDissolve, animations: {
                     self.mLabel.textColor = self.oFontColor
                 }, completion: nil)
@@ -143,12 +143,12 @@ extension PTTextField: UITextFieldDelegate {
     }
     
     @available(iOS 10.0, *)
-    private func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+    public func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         UIView.animate(withDuration: 0.25, animations: {
             self.bIsShowing = true
             if self.text!.isEmpty {
                 self.mView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                self.mView.frame = CGRect(x: textField.frame.origin.x + 10.0, y: textField.frame.origin.y + (self.frame.size.height / 4), width: self.getWidthSize(fSize: 16.0) + 8.0, height: (self.frame.size.height / 2))
+                self.mView.frame = CGRect(x: textField.frame.origin.x + 10.0, y: textField.frame.origin.y + (self.frame.size.height / 4), width: self.getWidthSize(fSize: 16.0) + 16.0, height: (self.frame.size.height / 2))
                 UIView.transition(with: self.mLabel, duration: 0.25, options: .transitionCrossDissolve, animations: {
                     self.mLabel.textColor = self.oPlaceHolderColor
                 }, completion: nil)
@@ -160,7 +160,7 @@ extension PTTextField: UITextFieldDelegate {
             self.attributedPlaceholder = NSAttributedString(
                 string: self.sTextShow,
                 attributes: [
-                    NSAttributedString.Key.foregroundColor: self.oPlaceHolderColor,
+                    NSAttributedString.Key.foregroundColor: self.oPlaceHolderColor!,
                     NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16.0)
                 ]
             )
@@ -169,11 +169,11 @@ extension PTTextField: UITextFieldDelegate {
         }
     }
     
-    private func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+    public func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return !self.bIsShowing
     }
     
-    private func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+    public func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return !self.bIsShowing
     }
 }
