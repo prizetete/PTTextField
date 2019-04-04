@@ -22,6 +22,7 @@ open class PTTextField: UITextField {
     var oBGColor: UIColor!
     var oFontColor: UIColor!
     var oPlaceHolderColor: UIColor!
+    var oFont: UIFont!
     
     var bVerify: Bool!
     var bIsShowing: Bool!
@@ -38,8 +39,9 @@ open class PTTextField: UITextField {
     }
     
     
-    public func setupPTTextField(sTextShow: String, oBGColor: UIColor = .white, oPlaceHolderColor: UIColor = .gray, oFontColor: UIColor = .gray, sRegEX: String = "", oCorrectColor: UIColor = .green, oWrongColor: UIColor = .red, cornerRadius: CGFloat = 10.0, borderColor: UIColor = .gray, borderWidth: CGFloat = 1.0, bHaveClearBtn: Bool = true) {
+    public func setupPTTextField(sTextShow: String, oBGColor: UIColor = .white, oPlaceHolderColor: UIColor = .gray, oFontColor: UIColor = .gray, sRegEX: String = "", oCorrectColor: UIColor = .green, oWrongColor: UIColor = .red, cornerRadius: CGFloat = 10.0, borderColor: UIColor = .gray, borderWidth: CGFloat = 1.0, oFont: UIFont, bHaveClearBtn: Bool = true) {
         self.delegate = self
+        self.oFont = oFont
         self.sTextShow = sTextShow
         self.oBorderColor = borderColor
         self.oFontColor = oFontColor
@@ -57,10 +59,10 @@ open class PTTextField: UITextField {
             string: self.sTextShow,
             attributes: [
                 NSAttributedString.Key.foregroundColor: self.oPlaceHolderColor!,
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16.0)
+                NSAttributedString.Key.font: self.oFont
             ]
         )
-        
+        self.autocorrectionType = .no
         if bHaveClearBtn {
             self.clearButtonMode = .whileEditing;
         }
@@ -79,8 +81,8 @@ open class PTTextField: UITextField {
     }
     
     private func getWidthSize(fSize: CGFloat) -> CGFloat {
-        let fontAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fSize)]
-        let size = self.sTextShow.size(withAttributes: fontAttributes)
+        let fontAttributes = [NSAttributedString.Key.font: self.oFont]
+        let size = self.sTextShow.size(withAttributes: fontAttributes as [NSAttributedString.Key : Any])
         return size.width
     }
     
@@ -115,15 +117,15 @@ extension PTTextField: UITextFieldDelegate {
         self.mView.backgroundColor = self.oBGColor
         if self.text!.isEmpty {
             self.mView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            self.mView.frame = CGRect(x: textField.frame.origin.x + 10.0, y: textField.frame.origin.y + (self.frame.size.height / 4), width: self.getWidthSize(fSize: 16.0) + 16.0, height: (self.frame.size.height / 2))
+            self.mView.frame = CGRect(x: textField.frame.origin.x + 10.0, y: textField.frame.origin.y + (self.frame.size.height / 4), width: self.getWidthSize(fSize: self.oFont.pointSize) + 16.0, height: (self.frame.size.height / 2))
         } else {
             //            self.mLabel.textColor = self.oFontColor
             self.mView.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
-            self.mView.frame = CGRect(x: textField.frame.origin.x + 10.0, y: textField.frame.origin.y - (self.frame.size.height / 4), width: self.getWidthSize(fSize: 12.0) + 8.0, height: (self.frame.size.height / 2))
+            self.mView.frame = CGRect(x: textField.frame.origin.x + 10.0, y: textField.frame.origin.y - (self.frame.size.height / 4), width: self.getWidthSize(fSize: ((self.oFont.pointSize * 100) / 75)) + 8.0, height: (self.frame.size.height / 2))
         }
         
         self.mLabel.text = self.sTextShow
-        self.mLabel.font = .systemFont(ofSize: 16.0)
+        self.mLabel.font = self.oFont
         self.mLabel.textAlignment = .left
         
         self.mLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -135,7 +137,7 @@ extension PTTextField: UITextFieldDelegate {
             UIView.animate(withDuration: 0.25, animations: {
                 self.bIsShowing = true
                 self.mView.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
-                self.mView.frame = CGRect(x: textField.frame.origin.x + 10.0, y: textField.frame.origin.y - (self.frame.size.height / 4), width: self.getWidthSize(fSize: 12.0) + 8.0, height: (self.frame.size.height / 2))
+                self.mView.frame = CGRect(x: textField.frame.origin.x + 10.0, y: textField.frame.origin.y - (self.frame.size.height / 4), width: self.getWidthSize(fSize: ((self.oFont.pointSize * 100) / 75)) + 8.0, height: (self.frame.size.height / 2))
                 UIView.transition(with: self.mLabel, duration: 0.25, options: .transitionCrossDissolve, animations: {
                     self.mLabel.textColor = self.oFontColor
                 }, completion: nil)
@@ -151,7 +153,7 @@ extension PTTextField: UITextFieldDelegate {
             self.bIsShowing = true
             if self.text!.isEmpty {
                 self.mView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                self.mView.frame = CGRect(x: textField.frame.origin.x + 10.0, y: textField.frame.origin.y + (self.frame.size.height / 4), width: self.getWidthSize(fSize: 16.0) + 16.0, height: (self.frame.size.height / 2))
+                self.mView.frame = CGRect(x: textField.frame.origin.x + 10.0, y: textField.frame.origin.y + (self.frame.size.height / 4), width: self.getWidthSize(fSize: self.oFont.pointSize) + 16.0, height: (self.frame.size.height / 2))
                 UIView.transition(with: self.mLabel, duration: 0.25, options: .transitionCrossDissolve, animations: {
                     self.mLabel.textColor = self.oPlaceHolderColor
                 }, completion: nil)
@@ -164,7 +166,7 @@ extension PTTextField: UITextFieldDelegate {
                 string: self.sTextShow,
                 attributes: [
                     NSAttributedString.Key.foregroundColor: self.oPlaceHolderColor!,
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16.0)
+                    NSAttributedString.Key.font: self.oFont
                 ]
             )
             self.layer.borderColor = self.oBorderColor.cgColor
