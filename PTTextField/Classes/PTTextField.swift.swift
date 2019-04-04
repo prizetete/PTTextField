@@ -38,9 +38,8 @@ open class PTTextField: UITextField {
     }
     
     
-    public func setupPTTextField(target: AnyObject, sTextShow: String, oBGColor: UIColor = .white, oPlaceHolderColor: UIColor = .gray, oFontColor: UIColor = .gray, sRegEX: String = "", oCorrectColor: UIColor = .green, oWrongColor: UIColor = .red, cornerRadius: CGFloat = 10.0, borderColor: UIColor = .gray, borderWidth: CGFloat = 1.0, bHaveClearBtn: Bool = true) {
+    public func setupPTTextField(sTextShow: String, oBGColor: UIColor = .white, oPlaceHolderColor: UIColor = .gray, oFontColor: UIColor = .gray, sRegEX: String = "", oCorrectColor: UIColor = .green, oWrongColor: UIColor = .red, cornerRadius: CGFloat = 10.0, borderColor: UIColor = .gray, borderWidth: CGFloat = 1.0, bHaveClearBtn: Bool = true) {
         self.delegate = self
-        self.clearButtonMode = .whileEditing;
         self.sTextShow = sTextShow
         self.oBorderColor = borderColor
         self.oFontColor = oFontColor
@@ -61,6 +60,10 @@ open class PTTextField: UITextField {
                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16.0)
             ]
         )
+        
+        if bHaveClearBtn {
+            self.clearButtonMode = .whileEditing;
+        }
     }
     
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
