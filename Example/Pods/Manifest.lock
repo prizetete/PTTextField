@@ -1,5 +1,5 @@
 PODS:
-  - PTTextField (0.1.3)
+  - PTTextField (0.1.4)
 
 DEPENDENCIES:
   - PTTextField (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  PTTextField: 083eaca0dbf38a031c2d203d1a1b5ee6aed1ab97
+  PTTextField: c4c87fe6012463b263cf3555b5eb74c142cb1fe1
 
 PODFILE CHECKSUM: 2ecc9ba6d29be3328dc7658a4238959a254064d6
 

@@ -41,7 +41,9 @@ open class PTTextField: UITextField {
     
     public func setupPTTextField(sTextShow: String, oBGColor: UIColor = .white, oPlaceHolderColor: UIColor = .gray, oFontColor: UIColor = .gray, sRegEX: String = "", oCorrectColor: UIColor = .green, oWrongColor: UIColor = .red, cornerRadius: CGFloat = 10.0, borderColor: UIColor = .gray, borderWidth: CGFloat = 1.0, oFont: UIFont = UIFont.systemFont(ofSize: 16.0), bHaveClearBtn: Bool = true) {
         self.delegate = self
-        self.oFont = oFont
+        if bHaveClearBtn {
+            self.clearButtonMode = .whileEditing;
+        }
         self.sTextShow = sTextShow
         self.oBorderColor = borderColor
         self.oFontColor = oFontColor
@@ -50,7 +52,7 @@ open class PTTextField: UITextField {
         self.oWrongColor = oWrongColor
         self.oCorrectColor = oCorrectColor
         self.sRegEX = sRegEX
-        
+        self.oFont = oFont
         self.layer.cornerRadius = cornerRadius
         self.layer.borderColor = borderColor.cgColor
         self.layer.borderWidth = borderWidth
@@ -63,9 +65,6 @@ open class PTTextField: UITextField {
             ]
         )
         self.autocorrectionType = .no
-        if bHaveClearBtn {
-            self.clearButtonMode = .whileEditing;
-        }
     }
     
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
@@ -81,8 +80,8 @@ open class PTTextField: UITextField {
     }
     
     private func getWidthSize(fSize: CGFloat) -> CGFloat {
-        let fontAttributes = [NSAttributedString.Key.font: self.oFont]
-        let size = self.sTextShow.size(withAttributes: fontAttributes as [NSAttributedString.Key : Any])
+        let fontAttributes = [NSAttributedString.Key.font: self.oFont.withSize(fSize)]
+        let size = self.sTextShow.size(withAttributes: fontAttributes)
         return size.width
     }
     

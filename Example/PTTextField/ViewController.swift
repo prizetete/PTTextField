@@ -19,7 +19,8 @@ class ViewController: UIViewController {
 //
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.mPTTextField.setupPTTextField(sTextShow: "Hello World eiei", oFont: UIFont.systemFont(ofSize: 16.0))
+//        self.mPTTextField.setupPTTextField(sTextShow: "Hello World eiei", oFont: UIFont.systemFont(ofSize: 16.0))
+        self.mPTTextField.setupPTTextField(sTextShow: "HEHEHE")
 //        self.view.addSubview(self.oPTTextField)
 //        self.oPTTextField.setupPTTextField(sTextShow: "Sawaddee kubb")
 //        self.oPTTextField.translatesAutoresizingMaskIntoConstraints = false
