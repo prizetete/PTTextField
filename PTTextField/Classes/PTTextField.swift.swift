@@ -18,7 +18,7 @@ open class PTTextField: UITextField {
     var tintedClearHighLightedImage: UIImage?
     
     private var sRegEX: String = ""
-    var regEX: String! {
+    public var regEX: String! {
         get {
             return self.sRegEX
         }
@@ -28,7 +28,7 @@ open class PTTextField: UITextField {
     }
     
     private var sTextShow: String = ""
-    var textShow: String! {
+    public var textShow: String! {
         get {
             return self.sTextShow
         }
@@ -38,7 +38,7 @@ open class PTTextField: UITextField {
     }
     
     private var oCorrectColor: UIColor = .green
-    var correctColor: UIColor! {
+    public var correctColor: UIColor! {
         get {
             return self.oCorrectColor
         }
@@ -48,7 +48,7 @@ open class PTTextField: UITextField {
     }
     
     private var oWrongColor: UIColor = .red
-    var wrongColor: UIColor! {
+    public var wrongColor: UIColor! {
         get {
             return self.oWrongColor
         }
@@ -58,7 +58,7 @@ open class PTTextField: UITextField {
     }
     
     private var oBGColor: UIColor = .white
-    var BGColor: UIColor! {
+    public var BGColor: UIColor! {
         get {
             return self.oBGColor
         }
@@ -70,7 +70,7 @@ open class PTTextField: UITextField {
     }
     
     private var oFontColor: UIColor = .gray
-    var fontColor: UIColor! {
+    public var fontColor: UIColor! {
         get {
             return self.oFontColor
         }
@@ -81,7 +81,7 @@ open class PTTextField: UITextField {
     }
     
     private var oPlaceHolderColor: UIColor = .gray
-    var placeHolderColor: UIColor! {
+    public var placeHolderColor: UIColor! {
         get {
             return self.oPlaceHolderColor
         }
@@ -91,7 +91,7 @@ open class PTTextField: UITextField {
     }
     
     private var oFont: UIFont = UIFont.systemFont(ofSize: 16.0)
-    var textFont: UIFont! {
+    public var textFont: UIFont! {
         get {
             return self.oFont
         }
@@ -101,7 +101,7 @@ open class PTTextField: UITextField {
     }
     
     private var oBorderColor: UIColor = .gray
-    var borderColor: UIColor! {
+    public var borderColor: UIColor! {
         get {
             return self.oBorderColor
         }
@@ -112,7 +112,7 @@ open class PTTextField: UITextField {
     }
     
     private var oCornerRadius: CGFloat = 10.0
-    var cornerRadius: CGFloat! {
+    public var cornerRadius: CGFloat! {
         get {
             return self.oCornerRadius
         }
@@ -123,7 +123,7 @@ open class PTTextField: UITextField {
     }
     
     private var oBorderWidth: CGFloat = 1.0
-    var borderWidth: CGFloat! {
+    public var borderWidth: CGFloat! {
         get {
             return self.oBorderWidth
         }
@@ -134,7 +134,7 @@ open class PTTextField: UITextField {
     }
     
     private var oTextColor: UIColor = .gray
-    var fontTextColor: UIColor! {
+    public var fontTextColor: UIColor! {
         get {
             return self.oTextColor
         }
@@ -145,7 +145,7 @@ open class PTTextField: UITextField {
     }
     
     private var oClearBtnColor: UIColor = .red
-    var clearBtnColor: UIColor! {
+    public var clearBtnColor: UIColor! {
         get {
             return self.oClearBtnColor
         }
