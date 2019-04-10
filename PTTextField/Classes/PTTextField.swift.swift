@@ -144,7 +144,7 @@ open class PTTextField: UITextField {
         }
     }
     
-    private var oClearBtnColor: UIColor = .red
+    private var oClearBtnColor: UIColor = .gray
     public var clearBtnColor: UIColor! {
         get {
             return self.oClearBtnColor
