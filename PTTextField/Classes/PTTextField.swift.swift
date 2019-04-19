@@ -173,7 +173,8 @@ open class PTTextField: UITextField {
     }
     
     override open func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: self.oLeftConstraint - 2.0, dy: 0.0)
+        //        return bounds.insetBy(dx: self.oLeftConstraint - 2.0, dy: 0.0)
+        return bounds.insetBy(dx: self.oLeftConstraint + (self.oLeftConstraint / 2), dy: 0.0)
     }
     
     private func getWidthSize(fSize: CGFloat) -> CGFloat {
@@ -248,9 +249,6 @@ extension PTTextField: UITextFieldDelegate {
             self.bIsShowing = true
             self.mLabel.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
             self.mLabel.frame = CGRect(x: textField.frame.origin.x + self.oLeftConstraint, y: textField.frame.origin.y - (self.frame.size.height / 4), width: self.getWidthSize(fSize: ((self.oFont.pointSize * 75) / 100))  + self.oLeftConstraint, height: (self.frame.size.height / 2) - 4.0)
-            UIView.transition(with: self.mLabel, duration: 0.25, options: .transitionCrossDissolve, animations: {
-                self.mLabel.textColor = self.oFontColor
-            }, completion: nil)
         }) { (complete) in
             self.bIsShowing = false
         }
@@ -264,9 +262,6 @@ extension PTTextField: UITextFieldDelegate {
             if self.text!.isEmpty {
                 self.mLabel.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 self.mLabel.frame = CGRect(x: textField.frame.origin.x + self.oLeftConstraint, y: textField.frame.origin.y + 1.0, width: self.getWidthSize(fSize: self.oFont.pointSize) + self.oLeftConstraint, height: self.frame.size.height - 4.0)
-                UIView.transition(with: self.mLabel, duration: 0.25, options: .transitionCrossDissolve, animations: {
-                    self.mLabel.textColor = self.oFontColor
-                }, completion: nil)
             }
         }) { (complete) in
             if self.text!.isEmpty {
