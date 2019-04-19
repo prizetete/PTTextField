@@ -164,9 +164,9 @@ open class PTTextField: UITextField {
         self.tintClearImage()
     }
     
-    //    override open func textRect(forBounds bounds: CGRect) -> CGRect {
-    //        return bounds.insetBy(dx: self.oLeftConstraint - 1.0, dy: 0.0)
-    //    }
+    override open func textRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.insetBy(dx: self.oLeftConstraint + (self.oLeftConstraint / 2), dy: 0.0)
+    }
     
     override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.insetBy(dx: self.oLeftConstraint + (self.oLeftConstraint / 2), dy: 0.0)
