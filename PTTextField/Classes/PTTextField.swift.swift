@@ -246,7 +246,6 @@ open class PTTextField: UITextField {
 }
 
 extension PTTextField: UITextFieldDelegate {
-    
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         self.placeholder = ""
         self.superview?.addSubview(self.mLabel)
@@ -262,9 +261,7 @@ extension PTTextField: UITextFieldDelegate {
             self.mLabel.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
             self.mLabel.frame = CGRect(x: textField.frame.origin.x + self.oLeftConstraint, y: textField.frame.origin.y - (self.frame.size.height / 4), width: self.getWidthSize(fSize: ((self.oFont.pointSize * 75) / 100))  + self.oLeftConstraint, height: (self.frame.size.height / 2) - 4.0)
         }
-        
         self.mLabel.layoutIfNeeded()
-        
         UILabel.transition(with: self, duration: TimeInterval(self.oAnimationDuration), options: [self.oAnimationOption], animations: {
             self.bIsShowing = true
             self.mLabel.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
@@ -278,7 +275,6 @@ extension PTTextField: UITextFieldDelegate {
     @available(iOS 10.0, *)
     public func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         self.mLabel.layoutIfNeeded()
-        
         UILabel.transition(with: self, duration: TimeInterval(self.oAnimationDuration), options: [self.oAnimationOption], animations: {
             self.bIsShowing = true
             if self.text!.isEmpty {
