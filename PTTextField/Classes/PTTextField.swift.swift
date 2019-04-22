@@ -25,6 +25,16 @@ open class PTTextField: UITextField {
         }
     }
     
+    private var oAnimationOption: UIView.AnimationOptions = .curveEaseOut
+    public var animationOption: UIView.AnimationOptions! {
+        get {
+            return self.oAnimationOption
+        }
+        set {
+            self.oAnimationOption = newValue
+        }
+    }
+    
     private var oBGColor: UIColor = .white
     public var BGColor: UIColor! {
         get {
@@ -44,7 +54,6 @@ open class PTTextField: UITextField {
         }
         set {
             self.oFontColor = newValue
-            self.mLabel.textColor = self.oFontColor
         }
     }
     
@@ -122,6 +131,16 @@ open class PTTextField: UITextField {
         }
     }
     
+    private var oAnimationDuration: CGFloat = 0.25
+    public var animationDuration: CGFloat! {
+        get {
+            return self.oAnimationDuration
+        }
+        set {
+            self.oAnimationDuration = newValue
+        }
+    }
+    
     private var oClearBtnColor: UIColor = .gray
     public var clearBtnColor: UIColor! {
         get {
@@ -130,6 +149,7 @@ open class PTTextField: UITextField {
         set {
             self.oClearBtnColor = newValue
         }
+        
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -144,7 +164,7 @@ open class PTTextField: UITextField {
         self.layer.borderWidth = self.oBorderWidth
         self.layer.cornerRadius = self.oCornerRadius
         self.layer.borderColor = self.oBorderColor.cgColor
-        self.mLabel.textColor = self.oFontColor
+        self.mLabel.textColor = self.oPlaceHolderColor
         self.backgroundColor = self.oBGColor
         self.mLabel.backgroundColor = self.oBGColor
         
@@ -173,7 +193,6 @@ open class PTTextField: UITextField {
     }
     
     override open func editingRect(forBounds bounds: CGRect) -> CGRect {
-        //        return bounds.insetBy(dx: self.oLeftConstraint - 2.0, dy: 0.0)
         return bounds.insetBy(dx: self.oLeftConstraint + (self.oLeftConstraint / 2), dy: 0.0)
     }
     
@@ -234,7 +253,7 @@ extension PTTextField: UITextFieldDelegate {
         self.mLabel.text = self.sTextShow
         self.mLabel.font = self.oFont
         self.mLabel.textAlignment = .center
-        self.mLabel.backgroundColor = self.oBGColor //.green //
+        self.mLabel.backgroundColor = self.oBGColor
         
         if self.text!.isEmpty {
             self.mLabel.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
@@ -244,20 +263,33 @@ extension PTTextField: UITextFieldDelegate {
             self.mLabel.frame = CGRect(x: textField.frame.origin.x + self.oLeftConstraint, y: textField.frame.origin.y - (self.frame.size.height / 4), width: self.getWidthSize(fSize: ((self.oFont.pointSize * 75) / 100))  + self.oLeftConstraint, height: (self.frame.size.height / 2) - 4.0)
         }
         
+        self.mLabel.layoutIfNeeded()
+        if self.text!.isEmpty {
+            UIView.transition(with: self.mLabel, duration: TimeInterval(self.oAnimationDuration), options: .transitionCrossDissolve, animations: {
+                self.mLabel.textColor = self.oFontColor
+            }, completion: nil)
+        }
         
-        UILabel.animate(withDuration: 0.25, animations: {
+        UILabel.transition(with: self, duration: TimeInterval(self.oAnimationDuration), options: [self.oAnimationOption], animations: {
             self.bIsShowing = true
             self.mLabel.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
             self.mLabel.frame = CGRect(x: textField.frame.origin.x + self.oLeftConstraint, y: textField.frame.origin.y - (self.frame.size.height / 4), width: self.getWidthSize(fSize: ((self.oFont.pointSize * 75) / 100))  + self.oLeftConstraint, height: (self.frame.size.height / 2) - 4.0)
+            
         }) { (complete) in
             self.bIsShowing = false
         }
-        
     }
     
     @available(iOS 10.0, *)
     public func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        UILabel.animate(withDuration: 0.25, animations: {
+        self.mLabel.layoutIfNeeded()
+        if self.text!.isEmpty {
+            UIView.transition(with: self.mLabel, duration: TimeInterval(self.oAnimationDuration), options: .transitionCrossDissolve, animations: {
+                self.mLabel.textColor = self.oPlaceHolderColor
+            }, completion: nil)
+        }
+        
+        UILabel.transition(with: self, duration: TimeInterval(self.oAnimationDuration), options: [self.oAnimationOption], animations: {
             self.bIsShowing = true
             if self.text!.isEmpty {
                 self.mLabel.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
