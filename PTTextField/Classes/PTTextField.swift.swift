@@ -280,7 +280,7 @@ extension PTTextField: UITextFieldDelegate {
             if self.text!.isEmpty {
                 self.mLabel.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 self.mLabel.frame = CGRect(x: textField.frame.origin.x + self.oLeftConstraint, y: textField.frame.origin.y + 1.0, width: self.getWidthSize(fSize: self.oFont.pointSize) + self.oLeftConstraint, height: self.frame.size.height - 4.0)
-            }
+            } 
         }) { (complete) in
             if self.text!.isEmpty {
                 self.mLabel.removeFromSuperview()
