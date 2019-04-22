@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'PTTextField'
-  s.version          = '0.1.12'
+  s.version          = '0.1.13'
   s.swift_version    = '4.2'
   s.summary          = 'PTTextField is TextField With Label'
 

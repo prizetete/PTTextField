@@ -264,11 +264,6 @@ extension PTTextField: UITextFieldDelegate {
         }
         
         self.mLabel.layoutIfNeeded()
-        if self.text!.isEmpty {
-            UIView.transition(with: self.mLabel, duration: TimeInterval(self.oAnimationDuration), options: .transitionCrossDissolve, animations: {
-                self.mLabel.textColor = self.oFontColor
-            }, completion: nil)
-        }
         
         UILabel.transition(with: self, duration: TimeInterval(self.oAnimationDuration), options: [self.oAnimationOption], animations: {
             self.bIsShowing = true
@@ -283,11 +278,6 @@ extension PTTextField: UITextFieldDelegate {
     @available(iOS 10.0, *)
     public func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         self.mLabel.layoutIfNeeded()
-        if self.text!.isEmpty {
-            UIView.transition(with: self.mLabel, duration: TimeInterval(self.oAnimationDuration), options: .transitionCrossDissolve, animations: {
-                self.mLabel.textColor = self.oPlaceHolderColor
-            }, completion: nil)
-        }
         
         UILabel.transition(with: self, duration: TimeInterval(self.oAnimationDuration), options: [self.oAnimationOption], animations: {
             self.bIsShowing = true
